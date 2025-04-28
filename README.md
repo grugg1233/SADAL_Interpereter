@@ -4,28 +4,28 @@ Built a lexical analyzer, parser, and interpereter for a Simple ADA like languag
 
 A recursive-descent interpreter for the Simple Ada-Like (SADAL) language, implemented in C++. This project includes a lexer, parser, and interpreter capable of processing SADAL programs with basic control structures, arithmetic operations, and I/O statements.
 
-EBNF : 
-Prog ::= PROCEDURE ProcName IS ProcBody
-ProcBody ::= DeclPart BEGIN StmtList END ProcName ;
-ProcName ::= IDENT
-DeclPart ::= DeclStmt { DeclStmt }
-DeclStmt ::= IDENT {, IDENT } : Type [:= Expr] ;
-Type ::= INTEGER | FLOAT | BOOLEAN | STRING | CHARACTER
-StmtList ::= Stmt { Stmt }
-Stmt ::= AssignStmt | PrintStmts | GetStmt | IfStmt
-PrintStmts ::= (PutLine | Put) ( Expr) ;
-GetStmt := Get (Var) ;
-IfStmt ::= IF Expr THEN StmtList { ELSIF Expr THEN StmtList } [ ELSE StmtList ] END IF ;
-AssignStmt ::= Var := Expr ;
-Expr ::= Relation {(AND | OR) Relation }
-Relation ::= SimpleExpr [ ( = | /= | < | <= | > | >= )  SimpleExpr ]
-SimpleExpr ::= STerm { ( + | - | & ) STerm }
-STerm ::= [ ( + | - ) ] Term
-Term ::= Factor { ( * | / | MOD ) Factor }
-Factor ::= Primary [** [(+ | -)] Primary ] | NOT Primary
-Primary ::= Name | ICONST | FCONST | SCONST | BCONST | CCONST | (Expr)
-Name ::= IDENT [ ( Range ) ]
-Range ::= SimpleExpr [. . SimpleExpr ]
+EBNF : <br>
+Prog ::= PROCEDURE ProcName IS ProcBody <br>
+ProcBody ::= DeclPart BEGIN StmtList END ProcName ;<br>
+ProcName ::= IDENT <br>
+DeclPart ::= DeclStmt { DeclStmt } <br>
+DeclStmt ::= IDENT {, IDENT } : Type [:= Expr] ; <br>
+Type ::= INTEGER | FLOAT | BOOLEAN | STRING | CHARACTER <br>
+StmtList ::= Stmt { Stmt } <br>
+Stmt ::= AssignStmt | PrintStmts | GetStmt | IfStmt <br>
+PrintStmts ::= (PutLine | Put) ( Expr) ; <br>
+GetStmt := Get (Var) ; <br>
+IfStmt ::= IF Expr THEN StmtList { ELSIF Expr THEN StmtList } [ ELSE StmtList ] END IF ; <br>
+AssignStmt ::= Var := Expr ; <br>
+Expr ::= Relation {(AND | OR) Relation } <br>
+Relation ::= SimpleExpr [ ( = | /= | < | <= | > | >= )  SimpleExpr ] <br>
+SimpleExpr ::= STerm { ( + | - | & ) STerm } <br>
+STerm ::= [ ( + | - ) ] Term <br>
+Term ::= Factor { ( * | / | MOD ) Factor } <br>
+Factor ::= Primary [** [(+ | -)] Primary ] | NOT Primary <br>
+Primary ::= Name | ICONST | FCONST | SCONST | BCONST | CCONST | (Expr) <br>
+Name ::= IDENT [ ( Range ) ] <br>
+Range ::= SimpleExpr [. . SimpleExpr ] <br>
 
 ## Features
 - **Lexical Analysis**: Tokenizes SADAL source code, handling identifiers, keywords, numbers, operators, and punctuation.
