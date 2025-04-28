@@ -4,6 +4,29 @@ Built a lexical analyzer, parser, and interpereter for a Simple ADA like languag
 
 A recursive-descent interpreter for the Simple Ada-Like (SADAL) language, implemented in C++. This project includes a lexer, parser, and interpreter capable of processing SADAL programs with basic control structures, arithmetic operations, and I/O statements.
 
+EBNF : 
+Prog ::= PROCEDURE ProcName IS ProcBody
+ProcBody ::= DeclPart BEGIN StmtList END ProcName ;
+ProcName ::= IDENT
+DeclPart ::= DeclStmt { DeclStmt }
+DeclStmt ::= IDENT {, IDENT } : Type [:= Expr] ;
+Type ::= INTEGER | FLOAT | BOOLEAN | STRING | CHARACTER
+StmtList ::= Stmt { Stmt }
+Stmt ::= AssignStmt | PrintStmts | GetStmt | IfStmt
+PrintStmts ::= (PutLine | Put) ( Expr) ;
+GetStmt := Get (Var) ;
+IfStmt ::= IF Expr THEN StmtList { ELSIF Expr THEN StmtList } [ ELSE StmtList ] END IF ;
+AssignStmt ::= Var := Expr ;
+Expr ::= Relation {(AND | OR) Relation }
+Relation ::= SimpleExpr [ ( = | /= | < | <= | > | >= )  SimpleExpr ]
+SimpleExpr ::= STerm { ( + | - | & ) STerm }
+STerm ::= [ ( + | - ) ] Term
+Term ::= Factor { ( * | / | MOD ) Factor }
+Factor ::= Primary [** [(+ | -)] Primary ] | NOT Primary
+Primary ::= Name | ICONST | FCONST | SCONST | BCONST | CCONST | (Expr)
+Name ::= IDENT [ ( Range ) ]
+Range ::= SimpleExpr [. . SimpleExpr ]
+
 ## Features
 - **Lexical Analysis**: Tokenizes SADAL source code, handling identifiers, keywords, numbers, operators, and punctuation.
 - **Parsing**: Recursive-descent parser implementing SADAL grammar, including:
@@ -26,3 +49,6 @@ A recursive-descent interpreter for the Simple Ada-Like (SADAL) language, implem
    ```bash
    git clone https://github.com/grugg1233/SADAL_Interpereter.git
    cd SADAL-Interpreter
+   cd src
+   g++ g_attallah_lex.cpp PA3Attallah.cpp prog3.cpp -o prog3
+   ./prog3 SADALfileName.(dat/txt)
